@@ -6,22 +6,38 @@ import java.util.Scanner;
 
 class CalculatorCata {
 
-    static Scanner scanner = new Scanner(System.in);
+    //static Scanner scanner = new Scanner(System.in);
     static int number1, number2;
     static char operation;
     static int result;
 
     public static void main(String[] args) {
         System.out.println("Введите выражение [2+2] или два римских числа от I до X:[V+V] + Enter ");
-//      Считываем строку userInput которую ввёл пользователь
-        String userInput = scanner.nextLine();
+       // calc("10+3");
+        calc("1+2");
+        calc("VI/III");
+      //  calc("12/4");
+        calc("XX+XI");
+      //  calc("I-II");
+       // calc("I+1");
+       // calc("1");
+      //  calc("1+2+3");
+
+
+    }
+
+
+    public static String calc(String input) {
+        //      Считываем строку userInput которую ввёл пользователь
+        Scanner scanner = new Scanner(input);
+        input = scanner.nextLine();
 
 //      Создаём пустой символьный массив длиной 10 символов:  under_char
         char[] under_char = new char[10];
 
 //      Заполняем символьный массив символами строки которую ввел пользователь и по ходу ловим знак операции
-        for (int i = 0; i < userInput.length(); i++) {
-            under_char[i] = userInput.charAt(i);
+        for (int i = 0; i < input.length(); i++) {
+            under_char[i] = input.charAt(i);
             if (under_char[i] == '+') {
                 operation = '+';
             }
@@ -49,12 +65,20 @@ class CalculatorCata {
             number2 = romanToNumber(string03);
 
             if (number1 == -1 & number2 == -1) {
-                number1 = Integer.parseInt(stable00);
-                number2 = Integer.parseInt(string03); //
-                result = calculated(number1, number2, operation);
-                System.out.println("--Результат для арабских цифр----");
-                System.out.println(number1 + " " + operation + " " + number2 + " = " + result);
-                return;
+                try {
+                    number1 = Integer.parseInt(stable00);
+                    number2 = Integer.parseInt(string03);
+                } catch (Exception e) {
+                    throw new InputMismatchException("//т.к. введенные числа не входят в отрезок 0-10");
+                }
+                if (number1 > 0 && number2 > 0 && number1 < 11 && number2 < 11) {
+                    result = calculated(number1, number2, operation);
+                    System.out.println("--Результат для арабских цифр----");
+                    System.out.println(number1 + " " + operation + " " + number2 + " = " + result);
+
+                } else
+                    throw new InputMismatchException("//т.к. введенные числа не входят в отрезок 0-10");
+
             } else if ((number1 != -1 & number2 == -1) | (number1 == -1 & number2 != -1)) {
                 throw new InputMismatchException("//т.к. используются одновременно разные системы счисления");
             } else if (number1 > 0 && number2 > 0 && number1 < 11 && number2 < 11) {
@@ -65,14 +89,13 @@ class CalculatorCata {
                 String resultRoman = convertNumToRoman(result);
                 System.out.println("---Результат для римских цифр----");
                 System.out.println(stable00 + " " + operation + " " + string03 + " = " + resultRoman);
-                return;
-            }
 
-        }
+            } else
+            throw new InputMismatchException("//т.к. введенные числа не входят в отрезок 0-10");
+        } else
         throw new InputMismatchException("//т.к. формат математической операции не удовлетворяет заданию - два операнда и один оператор (+, -, /, *)");
-
+return  null;
     }
-
 
     private static String convertNumToRoman(int numArabian) {
         String[] roman = {"O", "I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
