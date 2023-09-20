@@ -6,18 +6,21 @@ import java.util.Scanner;
 
 class CalculatorCata {
 
-    //static Scanner scanner = new Scanner(System.in);
+    static Scanner scanner = new Scanner(System.in);
     static int number1, number2;
     static char operation;
     static int result;
 
     public static void main(String[] args) {
+
         System.out.println("Введите выражение [2+2] или два римских числа от I до X:[V+V] + Enter ");
+        calc(scanner.nextLine());
+       // String input = scanner.nextLine();
        // calc("10+3");
-        calc("1+2");
-        calc("VI/III");
+        //calc("1+2");
+        //calc("VI/III");
       //  calc("12/4");
-        calc("XX+XI");
+       // calc("XX+XI");
       //  calc("I-II");
        // calc("I+1");
        // calc("1");
@@ -29,8 +32,7 @@ class CalculatorCata {
 
     public static String calc(String input) {
         //      Считываем строку userInput которую ввёл пользователь
-        Scanner scanner = new Scanner(input);
-        input = scanner.nextLine();
+
 
 //      Создаём пустой символьный массив длиной 10 символов:  under_char
         char[] under_char = new char[10];
